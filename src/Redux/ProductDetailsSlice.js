@@ -1,0 +1,41 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+
+
+export let getProductDetails = createAsyncThunk('getProductDetails', async (id) => {
+    let { data } = await axios.get(`https://dummyjson.com/products/${id}`)
+    return data
+
+})
+let ProductDetailsSlice = createSlice({
+    name: 'productdetails',
+    initialState: {
+        myProduct: null,
+        loading: false,
+        error: null
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getProductDetails.fulfilled, (state, action) => {
+            state.loading = false
+
+            state.myProduct = action.payload
+
+
+
+
+        })
+        builder.addCase(getProductDetails.pending, (state, action) => {
+            state.loading = true
+
+
+        })
+        builder.addCase(getProductDetails.rejected, (state, action) => {
+            state.loading = false
+            state.error = 'something went wrong'
+
+
+        })
+    }
+})
+export default ProductDetailsSlice.reducer
