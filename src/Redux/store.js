@@ -7,6 +7,7 @@ import ProductDetailsReducer from './ProductDetailsSlice'
 import categoryProductsReducer from './productsCategorySlice'
 import searchReducer from './SearchSlice'
 import CartReducer from './CartSlice'
+import WishlistReducer from './WishlistSlice'
 
 
 
@@ -19,7 +20,8 @@ export default configureStore({
          productdetails:ProductDetailsReducer,
          categoryProducts:categoryProductsReducer,
          search:searchReducer,
-         cart:CartReducer
+         cart:CartReducer,
+         wishlist:WishlistReducer
 
     }
 })

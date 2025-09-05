@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails } from '../../Redux/ProductDetailsSlice'
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Loading from '../Loading/Loading';
 import { FaUser } from "react-icons/fa";
 import PriceCalc from '../priceCalc/PriceCalc';
 import { addtoCart } from '../../Redux/CartSlice'
+import { handleWishlist } from '../../Redux/WishlistSlice'
+
 
 
 
@@ -56,6 +58,7 @@ export default function ProductDetails() {
 
   let { myProduct, loading } = useSelector((state) => state.productdetails)
   let dispatch = useDispatch()
+  let { wishlistItems } = useSelector((state) => state.wishlist)
 
 
   useEffect(() => {
@@ -73,8 +76,9 @@ export default function ProductDetails() {
         <button onClick={() => dispatch(addtoCart(myProduct))} className=' flex items-center justify-center gap-2 bg-[#198754] text-white px-5 py-2 rounded-md w-9/12 '>Add to Cart </button>
 
 
-        <div className='w-3/12 flex items-center justify-center bg-[#E2E3E5] px-2 py-2 rounded-md cursor-pointer  '>
-          <FaRegHeart className='w-full text-xl' />
+        <div className='w-3/12 flex items-center justify-center bg-[#E2E3E5] px-2 py-2 rounded-md cursor-pointer  ' onClick={() => dispatch(handleWishlist(myProduct))}>
+          {wishlistItems?.some((item) => item.id === myProduct.id) ? <FaHeart className='w-full' /> : <FaRegHeart className='w-full ' />}
+
 
         </div>
       </div>
@@ -130,7 +134,7 @@ export default function ProductDetails() {
             <div className='w-[40px] h-[40px] rounded-full bg-[#D1E7DD] flex justify-center items-center'><FaUser /></div>
 
             <div className=' flex flex-col justify-center'><h4 className='font-bold'>{review?.reviewerName}</h4>
-              <p className='text-sm text-[#6C757D]'>{review?.reviewerEmail}</p>
+              <p className='text-sm  text-[#6C757D]'>{review?.reviewerEmail}</p>
 
             </div>
           </div>
