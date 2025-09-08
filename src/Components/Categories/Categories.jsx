@@ -16,7 +16,7 @@ export default function Categories() {
   }, [])
   return <>
     {loading ? <Loading /> : <div className='w-7/12 mx-auto my-10 px-3 py-5'>
-      <div className='grid grid-cols-3 gap-3'>
+      <div className='grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1'>
 
         {categories.map((category) => <div key={category.slug} className='py-2 px-5 text-center shadow-2xl rounded-lg text-[#212529] cursor-pointer bg-[#d7d7d7]'>
           <Link to={`/categorydetails/${category.slug}`}>

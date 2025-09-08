@@ -10,6 +10,9 @@ import { FaUser } from "react-icons/fa";
 import PriceCalc from '../priceCalc/PriceCalc';
 import { addtoCart } from '../../Redux/CartSlice'
 import { handleWishlist } from '../../Redux/WishlistSlice'
+import ReactStars from 'react-stars'
+
+
 
 
 
@@ -51,7 +54,6 @@ export default function ProductDetails() {
     autoplaySpeed: 2000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-
   };
 
   let { id } = useParams()
@@ -59,6 +61,7 @@ export default function ProductDetails() {
   let { myProduct, loading } = useSelector((state) => state.productdetails)
   let dispatch = useDispatch()
   let { wishlistItems } = useSelector((state) => state.wishlist)
+
 
 
   useEffect(() => {
@@ -76,19 +79,28 @@ export default function ProductDetails() {
         <button onClick={() => dispatch(addtoCart(myProduct))} className=' flex items-center justify-center gap-2 bg-[#198754] text-white px-5 py-2 rounded-md w-9/12 '>Add to Cart </button>
 
 
-        <div className='w-3/12 flex items-center justify-center bg-[#E2E3E5] px-2 py-2 rounded-md cursor-pointer  ' onClick={() => dispatch(handleWishlist(myProduct))}>
-          {wishlistItems?.some((item) => item.id === myProduct.id) ? <FaHeart className='w-full' /> : <FaRegHeart className='w-full ' />}
+        <div className='w-3/12 flex items-center justify-center bg-[#E2E3E5] px-2 py-2 rounded-md cursor-pointer' onClick={() => dispatch(handleWishlist(myProduct))}>
+
+          {wishlistItems.some((item) => item.id == id) ? <FaHeart className='w-full text-red-600' /> : <FaRegHeart className='w-full' />}
 
 
         </div>
       </div>
     </div>
     <div className='w-8/12 h-full bg-[#F8F9FA] rounded-md p-5'>
-      <h3 className='font-bold text-3xl my-2'>{myProduct?.title}</h3>
+      <div className="flex flex-col gap-2 my-2">
+        <h3 className='font-bold text-3xl '>{myProduct?.title}</h3>
+        <div className="flex items-center gap-1">
+          <ReactStars value={myProduct?.rating} edit={false} count={5} size={25} />
+          <div>
+            <h6>{`${myProduct?.reviews.length}reviews`}</h6>
+          </div>
 
+        </div>
+      </div>
       <div className='flex justify-between items-center'>
         <div>
-          <p className=''>{myProduct?.description}</p>
+          <p>{myProduct?.description}</p>
 
         </div>
         <div>
@@ -141,7 +153,7 @@ export default function ProductDetails() {
 
           <div className='my-5 text-lg font-bold mx-5'>{review?.comment}</div>
           <div className='w-11/12 m-auto flex items-center justify-between'>
-            <div className=""></div>
+            <ReactStars value={review?.rating} edit={false} count={5} size={25} />
             <div className="text-[#6C757D] text-sm">{review?.date.split(`T0`).slice(0, 1).join(` `)}</div>
 
           </div>

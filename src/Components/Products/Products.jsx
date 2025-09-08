@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import './Products.Module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { myProducts } from '../../Redux/ProductsSlice'
-import ReactStars from 'react-rating-stars-component';
 import Loading from '../Loading/Loading';
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts';
 

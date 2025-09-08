@@ -7,6 +7,8 @@ import { addtoCart } from '../../Redux/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleWishlist } from '../../Redux/WishlistSlice';
 import { FaHeart } from "react-icons/fa";
+import ReactStars from 'react-stars';
+
 
 
 
@@ -30,8 +32,14 @@ export default function FeaturedProducts({ myProducts }) {
               <p className='text-[#0AAD0A]'>{product.category}</p>
 
               <h2 className='font-bold'>{product.title.split(' ').slice(0, 2).join(' ')}</h2>
-              {/* <ReactStars {...Ratings} value={product.rating} /> */}
-              <div className="flex items-center gap-3 my-1" >
+
+              <ReactStars
+                count={5}
+                size={20}
+                color2={'#ffd700'}
+                edit={false}
+                value={product?.rating}
+              />            <div className="flex items-center gap-3 my-1" >
                 <p className='text-red-600  line-through text-sm'>${product.price}</p>
                 <PriceCalc product={product} />
 
@@ -43,7 +51,7 @@ export default function FeaturedProducts({ myProducts }) {
 
 
               <div className='w-3/12 flex items-center justify-center bg-[#E2E3E5] px-2 py-2 rounded-sm ' onClick={() => dispatch(handleWishlist(product))}>
-                {wishlistItems?.some((item) => item.id === product.id) ? <FaHeart className='w-full' /> : <FaRegHeart className='w-full ' />}
+                {wishlistItems?.some((item) => item.id === product.id) ? <FaHeart className='w-full text-red-600' /> : <FaRegHeart className='w-full' />}
 
               </div>
             </div>
