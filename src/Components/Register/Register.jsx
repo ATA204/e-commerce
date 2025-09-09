@@ -114,7 +114,7 @@ export default function Register() {
 
       <div className='flex items-center m-auto w-full mt-8 justify-center gap-2 Account'>
         <p className='text-[#212529]'>Already have an account?</p>
-        <Link className='underline italic hover:no-underline' to='/login'>Login</Link>
+        <Link className='underline italic hover:no-underline font-bold' to='/login'>Login</Link>
       </div>
     </div>
   </>
