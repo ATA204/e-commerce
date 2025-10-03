@@ -57,7 +57,7 @@ export default function CategorySlider() {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -92,8 +92,8 @@ export default function CategorySlider() {
   return <>
     {loading ? <Loading /> : <>
       <h2 className='font-bold text-[#198754] text-4xl mx-4 py-5'>Categories :</h2>
-      <Slider className='w-11/12 m-auto bg-[#d7d7d7] mt-5 mb-10 h-36  px-2 rounded-md after:content-[""] after:absolute  after:left-0 after:w-full after:h-[1.5px] after:top-[130%] after:bg-[#e3e3e4] after:rounded-md after:z-20' {...settings}>
-        {categories?.map((category) => <div className=''>
+      <Slider {...settings}  className='w-11/12 m-auto bg-[#d7d7d7] mt-5 mb-10 h-36  px-2 rounded-md after:content-[""] after:absolute  after:left-0 after:w-full after:h-[1.5px] after:top-[130%] after:bg-[#e3e3e4] after:rounded-md after:z-20' >
+        {categories?.map((category) => <div className='' key={category.slug}>
           <Link to={`categorydetails/${category.slug}`}>
             <div className=' m-auto bg-[#F8F9FA] z-30 flex items-center justify-center shadow-2xl my-11 py-2  rounded-xl cursor-pointer'>
 
